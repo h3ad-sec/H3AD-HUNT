@@ -566,6 +566,50 @@
       line-height: 1.75;
     }
 
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 2.5rem;
+    }
+
+    .tool-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .tool-card:hover { border-color: rgba(0, 255, 159, 0.35); background: rgba(0, 255, 159, 0.02); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card.live { border-color: rgba(0, 255, 159, 0.3); }
+    .tool-card.live::before { opacity: 0.6; }
+
+    .card-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .card-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; background: var(--surface); flex-shrink: 0; }
+    .card-badge { font-size: 0.55rem; letter-spacing: 0.18em; padding: 3px 8px; border-radius: 2px; text-transform: uppercase; white-space: nowrap; }
+    .badge-live { background: rgba(0, 255, 159, 0.12); color: var(--accent); border: 1px solid rgba(0, 255, 159, 0.3); }
+    .card-name { font-size: 0.8rem; letter-spacing: 0.1em; color: var(--text); }
+    .card-desc { font-size: 0.68rem; color: var(--text-dim); line-height: 1.6; flex: 1; }
+    .card-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--accent); padding: 6px 12px; border: 1px solid rgba(0, 255, 159, 0.3); border-radius: 3px; transition: 0.15s; align-self: flex-start; }
+    .card-link:hover { background: rgba(0, 255, 159, 0.08); }
+
     .back-link {
       margin-top: 3rem;
     }
@@ -719,13 +763,22 @@
             class="tbar-dot g"></span><span class="tbar-label">h3ad@h3ad-hunt ~ bash</span></div>
         <div class="terminal-body">
           <div class="t-line"><span class="prompt">root@h3ad-hunt:~$</span><span class="cmd">status</span></div>
-          <div class="t-line gap"><span class="out"><span class="out-acc">H3AD-HUNT</span><span class="out-dim"> —
-              </span><span class="out-hl">module under active development</span></span></div>
-          <div class="t-line"><span class="prompt">root@h3ad-hunt:~$</span><span class="cmd">cat mission.txt</span>
-          </div>
-          <div class="t-line gap"><span class="out"><span class="out-hl">Find what alerts don't catch — then codify it
-                so they do. Every hunt is a detection in progress.</span></span></div>
+          <div class="t-line gap"><span class="out"><span class="out-acc">H3AD-HUNT</span><span class="out-dim"> — </span><span class="out-hl">module under active development</span></span></div>
+          <div class="t-line"><span class="prompt">root@h3ad-hunt:~$</span><span class="cmd">ls tools/</span></div>
+          <div class="t-line gap"><span class="out"><span class="out-acc">HYPOS</span><span class="out-dim"> [LIVE] — </span><span class="out-hl">hypothesis-driven threat hunting</span></span></div>
           <div class="t-line"><span class="prompt">root@h3ad-hunt:~$</span><span class="cursor"></span></div>
+        </div>
+      </div>
+      <div class="section-label">TOOLS</div>
+      <div class="tools-grid">
+        <div class="tool-card live">
+          <div class="card-header">
+            <div class="card-icon">⬡</div>
+            <span class="card-badge badge-live">LIVE</span>
+          </div>
+          <div class="card-name">HYPOS</div>
+          <div class="card-desc">Hypothesis-driven threat hunting platform. Input MITRE technique IDs, groups, malware, tools, or campaigns. Get structured hunt hypotheses backed by ATT&CK STIX data. Hunt smarter. Miss nothing.</div>
+          <a class="card-link" href="https://h3ad-sec.github.io/HYPOS/" target="_blank" rel="noopener">OPEN HYPOS ↗</a>
         </div>
       </div>
       <div class="back-link"><a href="https://h3ad-sec.github.io/">← Back to H3AD-SEC Platform</a></div>
