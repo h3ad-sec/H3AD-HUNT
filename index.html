@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>H3AD-HUNT - Threat Hunting // H3AD-SEC</title>
+  <title>H3AD-HUNT — Threat Hunting Platform // H3AD-SEC</title>
   <meta name="description"
-    content="H3AD-HUNT by H3AD-SEC - Hypothesis-driven threat hunting playbooks, KQL/SPL hunt queries, and hunt-to-detection pipelines. Coming soon.">
+    content="H3AD-HUNT by H3AD-SEC — three tools for structured, hypothesis-driven threat hunting. ATT&CK-native hypotheses, graph-based artifact pivoting, and actor-mapped hunt query packs.">
   <link rel="icon" href="https://h3ad-sec.github.io/fevicon.png?v=2026" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
@@ -693,6 +693,55 @@
     .xv-pill-accent{color:var(--accent);}
     .xv-pill-text{color:var(--text);}
     .xv-pill-tagline{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1.5px;}
+
+    /* ── Enterprise additions ───────────────────────────────────────── */
+    .hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.75rem;}
+    .stat-chip{display:flex;flex-direction:column;padding:10px 16px;background:var(--panel);border:1px solid var(--border);border-radius:4px;min-width:88px;}
+    .stat-val{font-size:1.05rem;color:var(--accent);letter-spacing:0.04em;line-height:1.2;}
+    .stat-label{font-size:0.53rem;letter-spacing:0.18em;color:var(--muted);margin-top:4px;}
+
+    .hero-chips{display:flex;flex-wrap:wrap;gap:5px;margin:1.5rem 0 1.75rem;}
+    .hero-chip{font-size:0.52rem;letter-spacing:0.22em;color:var(--muted);border:1px solid var(--border-dim);border-radius:2px;padding:3px 9px;white-space:nowrap;}
+
+    .manifesto-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 0;margin:2.5rem 0 3rem;}
+    .manifesto-text{font-size:clamp(0.82rem,2vw,1.05rem);color:var(--text);line-height:1.9;letter-spacing:0.02em;}
+
+    .tool-feature{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:28px 28px 22px;margin-bottom:14px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;transition:border-color 0.2s,background 0.2s;}
+    .tool-feature::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.55;}
+    .tool-feature:hover{border-color:rgba(0,255,159,0.35);background:rgba(0,255,159,0.02);}
+    .tf-header{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+    .tf-name{font-size:1rem;letter-spacing:0.14em;color:var(--text);}
+    .tf-tagline{font-size:0.8rem;color:var(--accent);letter-spacing:0.03em;}
+    .tf-body{font-size:0.71rem;color:var(--text-dim);line-height:1.8;max-width:600px;}
+    .tf-meta{font-size:0.57rem;letter-spacing:0.2em;color:var(--muted);border-top:1px solid var(--border-dim);padding-top:10px;margin-top:2px;}
+    .tf-link{display:inline-flex;align-items:center;gap:6px;font-size:0.63rem;letter-spacing:0.14em;color:var(--accent);padding:7px 14px;border:1px solid rgba(0,255,159,0.3);border-radius:3px;transition:0.15s;align-self:flex-start;margin-top:2px;}
+    .tf-link:hover{background:rgba(0,255,159,0.08);}
+    .card-badge{font-size:0.55rem;letter-spacing:0.18em;padding:3px 8px;border-radius:2px;text-transform:uppercase;white-space:nowrap;}
+    .badge-live{background:rgba(0,255,159,0.12);color:var(--accent);border:1px solid rgba(0,255,159,0.3);}
+
+    .cap-list{display:flex;flex-direction:column;gap:6px;margin:1.25rem 0 0;}
+    .cap-item{display:flex;align-items:baseline;gap:9px;font-size:0.65rem;color:var(--text-dim);line-height:1.6;}
+    .cap-dot{color:var(--accent);flex-shrink:0;font-size:0.5rem;}
+
+    .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:3rem;}
+    .pillar{background:var(--panel);padding:24px 20px;}
+    .pillar-num{font-size:0.5rem;letter-spacing:0.28em;color:var(--accent);opacity:0.55;margin-bottom:12px;}
+    .pillar-title{font-size:0.68rem;letter-spacing:0.14em;color:var(--text);margin-bottom:8px;}
+    .pillar-desc{font-size:0.62rem;color:var(--muted);line-height:1.75;}
+
+    .compliance-row{display:flex;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:3rem;}
+    .compliance-cell{background:var(--panel);padding:14px 18px;flex:1;display:flex;flex-direction:column;gap:5px;}
+    .compliance-val{font-size:0.72rem;color:var(--text);letter-spacing:0.06em;}
+    .compliance-label{font-size:0.52rem;letter-spacing:0.18em;color:var(--muted);}
+
+    .back-link-ent{display:inline-flex;align-items:center;gap:6px;font-size:0.65rem;letter-spacing:0.12em;color:var(--muted);padding:8px 14px;border:1px solid var(--border);border-radius:4px;transition:0.15s;margin-bottom:3rem;}
+    .back-link-ent:hover{color:var(--accent);border-color:rgba(0,255,159,0.4);}
+
+    @media(max-width:700px){
+      .pillars{grid-template-columns:1fr;}
+      .compliance-row{flex-direction:column;}
+      .stat-chip{min-width:72px;}
+    }
   </style>
 </head>
 
@@ -789,59 +838,131 @@
   <main>
     <div class="page">
       <section class="hero">
-        <span class="hero-tag">H3AD-SEC · platform module</span>
-        <h1 class="hero-title"><span>H3AD-HUNT</span> — Threat Hunting</h1>
-        <p class="hero-sub">Structured hypothesis-driven threat hunting — pre-built hunt playbooks, KQL and SPL hunt
-          queries, evidence collection templates, and a hunt-to-detection pipeline that codifies what you find.</p>
-        <div class="status-row"><span class="badge-cs"><span class="dot-pulse"></span>In Development</span></div>
+        <span class="hero-tag">H3AD-SEC / THREAT HUNTING PLATFORM</span>
+        <h1 class="hero-title">Hunt before<br>the <span>alert fires.</span></h1>
+        <p class="hero-sub">Three purpose-built tools for structured, hypothesis-driven threat hunting — form hypotheses from ATT&CK intelligence, pivot across every artifact in the kill chain, and access curated threat actor query packs ready to run against your estate.</p>
+        <div class="hero-chips">
+          <span class="hero-chip">ATT&amp;CK NATIVE</span>
+          <span class="hero-chip">HYPOTHESIS-DRIVEN</span>
+          <span class="hero-chip">GRAPH-BASED PIVOTING</span>
+          <span class="hero-chip">ACTOR-MAPPED QUERIES</span>
+          <span class="hero-chip">BROWSER-NATIVE</span>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-chip"><span class="stat-val">3</span><span class="stat-label">TOOLS LIVE</span></div>
+          <div class="stat-chip"><span class="stat-val">ATT&CK</span><span class="stat-label">STIX NATIVE</span></div>
+          <div class="stat-chip"><span class="stat-val">KQL·SPL</span><span class="stat-label">SIGMA · XQL</span></div>
+          <div class="stat-chip"><span class="stat-val">BYOB</span><span class="stat-label">NO ACCOUNT NEEDED</span></div>
+        </div>
       </section>
-      <div class="terminal">
-        <div class="terminal-bar"><span class="tbar-dot r"></span><span class="tbar-dot y"></span><span
-            class="tbar-dot g"></span><span class="tbar-label">h3ad@h3ad-hunt ~ bash</span></div>
-        <div class="terminal-body">
-          <div class="t-line"><span class="prompt">root@h3ad-hunt:~$</span><span class="cmd">status</span></div>
-          <div class="t-line gap"><span class="out"><span class="out-acc">H3AD-HUNT</span><span class="out-dim"> — </span><span class="out-hl">module under active development</span></span></div>
-          <div class="t-line"><span class="prompt">root@h3ad-hunt:~$</span><span class="cmd">ls tools/</span></div>
-          <div class="t-line gap"><span class="out"><span class="out-acc">HYPOS</span><span class="out-dim"> [LIVE] — </span><span class="out-hl">hypothesis-driven threat hunting</span></span></div>
-          <div class="t-line gap"><span class="out"><span class="out-acc">PIVEX</span><span class="out-dim"> [LIVE] — </span><span class="out-hl">pivot graph across artifacts</span></span></div>
-          <div class="t-line"><span class="prompt">root@h3ad-hunt:~$</span><span class="cursor"></span></div>
-        </div>
+
+      <div class="manifesto-strip">
+        <p class="manifesto-text">Reactive hunting based on alerts is already too late.<br>Structure your hunts before the attacker shows up in your logs.<br><span style="font-size:0.65rem;color:var(--muted);letter-spacing:0.06em;">Hypothesis. Pivot. Detect. The complete hunter workflow.</span></p>
       </div>
+
       <div class="section-label">TOOLS</div>
-      <div class="tools-grid">
-        <div class="tool-card live">
-          <div class="card-header">
-            <div class="card-icon">⬡</div>
-            <span class="card-badge badge-live">LIVE</span>
-          </div>
-          <div class="card-name">HYPOS</div>
-          <div class="card-desc">Hypothesis-driven threat hunting platform. Input MITRE technique IDs, groups, malware, tools, or campaigns. Get structured hunt hypotheses backed by ATT&CK STIX data. Hunt smarter. Miss nothing.</div>
-          <a class="card-link" href="https://h3ad-sec.github.io/HYPOS/" target="_blank" rel="noopener">OPEN HYPOS ↗</a>
+
+      <div class="tool-feature">
+        <div class="tf-header">
+          <div class="tf-name">HYPOS</div>
+          <span class="card-badge badge-live">LIVE</span>
         </div>
-        <div class="tool-card live">
-          <div class="card-header">
-            <div class="card-icon">⬡</div>
-            <span class="card-badge badge-live">LIVE</span>
-          </div>
-          <div class="card-name">PIVEX</div>
-          <div class="card-desc">Interactive pivot graph for SOC investigations. Map any artifact — IP, domain, hash, process, user, email, host — through enrichment, correlation, and decision paths. Pivot Across Every Artifact.</div>
-          <a class="card-link" href="https://h3ad-sec.github.io/PIVEX/" target="_blank" rel="noopener">OPEN PIVEX ↗</a>
+        <div class="tf-tagline">"Form better hypotheses. Hunt smarter. Miss nothing."</div>
+        <div class="tf-body">Query the MITRE ATT&CK STIX database locally — no external API for hypothesis generation. Input technique IDs, group names (APT29, Lazarus, FIN7), malware families, or campaign names. Get structured hunt hypotheses with data sources, detection logic, and evidence collection criteria organized into a searchable matrix.</div>
+        <div class="cap-list">
+          <div class="cap-item"><span class="cap-dot">◆</span><span>ATT&CK STIX data queried locally — full technique, group, malware, and campaign coverage without a live API call; works offline</span></div>
+          <div class="cap-item"><span class="cap-dot">◆</span><span>Hypothesis matrix view: filter by tactic, technique ID, data source, or actor attribution — structured output you can document and hand off</span></div>
+          <div class="cap-item"><span class="cap-dot">◆</span><span>Evidence criteria per hypothesis: what to look for, which log source to query, and what observation confirms or falsifies the hunt</span></div>
         </div>
-        <div class="tool-card live">
-          <div class="card-header">
-            <div class="card-icon">⬡</div>
-            <span class="card-badge badge-live">LIVE</span>
-          </div>
-          <div class="card-name">TRACEPULSE</div>
-          <div class="card-desc">Curated threat query packs mapped to active threat actors and campaigns. KQL, Sigma, and XQL hunt queries organized by threat group, malware family, and technique. Threat Query Packs.</div>
-          <a class="card-link" href="https://h3ad-sec.github.io/TRACEPULSE/" target="_blank" rel="noopener">OPEN TRACEPULSE ↗</a>
+        <div class="tf-meta" style="margin-top:1rem;">ATT&amp;CK STIX · BROWSER-BASED · MATRIX VIEW · NO API KEY</div>
+        <a class="tf-link" href="https://h3ad-sec.github.io/HYPOS/" target="_blank" rel="noopener">LAUNCH HYPOS →</a>
+      </div>
+
+      <div class="tool-feature">
+        <div class="tf-header">
+          <div class="tf-name">PIVEX</div>
+          <span class="card-badge badge-live">LIVE</span>
+        </div>
+        <div class="tf-tagline">"Pivot across every artifact in the investigation."</div>
+        <div class="tf-body">Interactive force-directed pivot graph for SOC investigations. Map any artifact — IP, domain, hash, process, user, email, host — through enrichment, correlation, and decision paths. Typed edges connect nodes by relationship: resolves_to, spawns, authenticates_as, connects_to, and more. Click any node to highlight its connections and dim everything else. The kill chain builds visually as you work.</div>
+        <div class="cap-list">
+          <div class="cap-item"><span class="cap-dot">◆</span><span>Force-directed layout with 30 node types and 83 typed edge relationships — every connection in your investigation has a defined semantic</span></div>
+          <div class="cap-item"><span class="cap-dot">◆</span><span>Node types: IP, Domain, Hash, Process, User, Email, Hostname, CVE, ATT&CK technique, Registry Key, and more</span></div>
+          <div class="cap-item"><span class="cap-dot">◆</span><span>Click to highlight / dim — node positions never animate on click; stable workspace for active investigations with no visual disruption</span></div>
+        </div>
+        <div class="tf-meta" style="margin-top:1rem;">30 NODE TYPES · 83 EDGE TYPES · FORCE-DIRECTED · HIGHLIGHT MODE</div>
+        <a class="tf-link" href="https://h3ad-sec.github.io/PIVEX/" target="_blank" rel="noopener">LAUNCH PIVEX →</a>
+      </div>
+
+      <div class="tool-feature">
+        <div class="tf-header">
+          <div class="tf-name">TRACEPULSE</div>
+          <span class="card-badge badge-live">LIVE</span>
+        </div>
+        <div class="tf-tagline">"Threat actor queries, ready to run."</div>
+        <div class="tf-body">Curated threat query packs mapped to active threat actors and campaigns. When an actor surfaces in a report or threat feed, run their specific hunt queries against your estate before they appear in your alerts. Generic hunt queries miss actor-specific tradecraft — TRACEPULSE maps to the actual TTP.</div>
+        <div class="cap-list">
+          <div class="cap-item"><span class="cap-dot">◆</span><span>Packs organized by threat actor (APT29, Lazarus, FIN7, Scattered Spider...), malware family, and ATT&CK technique — not generic category buckets</span></div>
+          <div class="cap-item"><span class="cap-dot">◆</span><span>KQL, Sigma, and XQL — syntactically complete, copy-pasteable hunt queries with no placeholders to fill</span></div>
+          <div class="cap-item"><span class="cap-dot">◆</span><span>Hunt-to-detection bridge: every query that returns a hit is a detection rule candidate — the path from hunt to SIEM rule is one step</span></div>
+        </div>
+        <div class="tf-meta" style="margin-top:1rem;">KQL · SIGMA · XQL · ACTOR-MAPPED · TECHNIQUE-TAGGED</div>
+        <a class="tf-link" href="https://h3ad-sec.github.io/TRACEPULSE/" target="_blank" rel="noopener">LAUNCH TRACEPULSE →</a>
+      </div>
+
+      <div class="section-label" style="margin-top:3rem;">BUILT FOR HUNTERS</div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">HYPOTHESIS FIRST</div>
+          <div class="pillar-desc">HYPOS turns ATT&CK intelligence into structured, documented hunt hypotheses before you've seen a single alert. Scoped, repeatable, and handoff-ready — not ad hoc searches driven by gut feeling.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">GRAPH-BASED PIVOTING</div>
+          <div class="pillar-desc">Artifacts don't exist in isolation. PIVEX maps every relationship between indicators across an investigation — building the kill chain visually as you work, not as a retrospective exercise after the fact.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">ACTOR-SPECIFIC QUERIES</div>
+          <div class="pillar-desc">Generic hunt queries miss actor-specific tradecraft. TRACEPULSE maps queries to the specific groups, malware families, and sub-techniques — so you're hunting the actual TTP, not a category of behavior.</div>
         </div>
       </div>
-      <div class="back-link"><a href="https://h3ad-sec.github.io/">← Back to H3AD-SEC Platform</a></div>
+
+      <div class="section-label">PLATFORM</div>
+
+      <div class="compliance-row">
+        <div class="compliance-cell">
+          <div class="compliance-val">BROWSER-NATIVE</div>
+          <div class="compliance-label">ALL 3 TOOLS</div>
+        </div>
+        <div class="compliance-cell">
+          <div class="compliance-val">ATT&amp;CK STIX</div>
+          <div class="compliance-label">LOCAL · NO API CALL</div>
+        </div>
+        <div class="compliance-cell">
+          <div class="compliance-val">3 LIVE</div>
+          <div class="compliance-label">TOOLS IN PRODUCTION</div>
+        </div>
+        <div class="compliance-cell">
+          <div class="compliance-val">KQL · SPL</div>
+          <div class="compliance-label">SIGMA · XQL</div>
+        </div>
+        <div class="compliance-cell">
+          <div class="compliance-val">NO ACCOUNT</div>
+          <div class="compliance-label">REQUIRED</div>
+        </div>
+      </div>
+
+      <a class="back-link-ent" href="https://h3ad-sec.github.io/">← BACK TO H3AD-SEC</a>
     </div>
   </main>
-  <footer><span class="footer-left">H3AD-SEC © 2026 &nbsp;|&nbsp; H3AD-HUNT</span><span
-      class="footer-right">Intelligence. Detection. Response.</span></footer>
+
+  <footer>
+    <span class="footer-left">H3AD-SEC © 2026 &nbsp;|&nbsp; H3AD-HUNT</span>
+    <span class="footer-right">Intelligence. Detection. Response.</span>
+  </footer>
   <script>
     function toggleDrawer() { document.getElementById('navDrawer').classList.toggle('open'); } function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); }
     document.addEventListener('click', e => { const d = document.getElementById('navDrawer'), h = document.getElementById('hamburger'); if (d.classList.contains('open') && !d.contains(e.target) && !h.contains(e.target)) closeDrawer(); });
