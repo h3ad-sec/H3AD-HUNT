@@ -543,13 +543,15 @@
     }
 
     .section-label {
-      font-size: 0.65rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
       letter-spacing: 0.22em;
-      color: var(--muted);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.65rem;
-      margin: 3rem 0 1.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 3rem 0 1.5rem;
+      display: flex; align-items: center; gap: 8px;
     }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
     .feat-grid {
       display: grid;
@@ -884,7 +886,7 @@
       <section class="hero">
         <span class="hero-tag">THREAT HUNTING MODULE</span>
         <h1 class="hero-title">Hunt Before<br><span>the Alert Fires.</span></h1>
-        <p class="hero-sub">Structured threat hunting across the full kill chain. Hypothesis-driven workflows, pivot graph infrastructure analysis, and CVE-tied detection packs — built for analysts hunting without a starting alert.</p>
+        <p class="hero-sub">Structured threat hunting across the full kill chain. Hypothesis-driven workflows, pivot graph infrastructure analysis, and CVE-tied detection packs, built for analysts hunting without a starting alert.</p>
         <div class="hero-chips">
           <span class="hero-chip">ATT&amp;CK NATIVE</span>
           <span class="hero-chip">HYPOTHESIS-DRIVEN</span>
@@ -930,13 +932,8 @@
           <div class="tf-name">HYPOS</div>
           <span class="card-badge badge-live">LIVE</span>
         </div>
-        <div class="tf-tagline">"Form better hypotheses. Hunt smarter. Miss nothing."</div>
-        <div class="tf-body">Structured threat hunting hypothesis platform. Build, organize, and track hunting hypotheses with a curated database of pre-built scenarios — tagged by MITRE ATT&CK technique, tactic, and data source. Matrix view for coverage gap analysis.</div>
-        <div class="cap-list">
-          <div class="cap-item"><span class="cap-dot">◆</span><span>ATT&CK STIX data queried locally — full technique, group, malware, and campaign coverage without a live API call; works offline</span></div>
-          <div class="cap-item"><span class="cap-dot">◆</span><span>Hypothesis matrix view: filter by tactic, technique ID, data source, or actor attribution — structured output you can document and hand off</span></div>
-          <div class="cap-item"><span class="cap-dot">◆</span><span>Evidence criteria per hypothesis: what to look for, which log source to query, and what observation confirms or falsifies the hunt</span></div>
-        </div>
+        <div class="tf-tagline">Hypothesis Platform · MITRE ATT&CK Coverage Matrix</div>
+        <div class="tf-body">Structured hypothesis platform with a curated hunt database, tagged by ATT&CK technique, tactic, and data source.</div>
         <div class="tf-meta" style="margin-top:1rem;">ATT&amp;CK STIX · BROWSER-BASED · MATRIX VIEW · NO API KEY</div>
         <a class="tf-link" href="https://h3ad-sec.github.io/HYPOS/" target="_blank" rel="noopener">LAUNCH HYPOS →</a>
       </div>
@@ -946,13 +943,8 @@
           <div class="tf-name">PIVEX</div>
           <span class="card-badge badge-live">LIVE</span>
         </div>
-        <div class="tf-tagline">"Pivot across every artifact in the investigation."</div>
-        <div class="tf-body">Force-directed pivot graph for infrastructure analysis. Map relationships between IPs, domains, certificates, ASNs, and threat actors. Visualize lateral movement paths and identify shared infrastructure across campaigns without writing graph queries.</div>
-        <div class="cap-list">
-          <div class="cap-item"><span class="cap-dot">◆</span><span>Force-directed layout with 30 node types and 83 typed edge relationships — every connection in your investigation has a defined semantic</span></div>
-          <div class="cap-item"><span class="cap-dot">◆</span><span>Node types: IP, Domain, Hash, Process, User, Email, Hostname, CVE, ATT&CK technique, Registry Key, and more</span></div>
-          <div class="cap-item"><span class="cap-dot">◆</span><span>Click to highlight / dim — node positions never animate on click; stable workspace for active investigations with no visual disruption</span></div>
-        </div>
+        <div class="tf-tagline">Pivot Graph · Infrastructure Relationship Mapping</div>
+        <div class="tf-body">Force-directed pivot graph for mapping relationships between IPs, domains, certificates, ASNs, and threat actors.</div>
         <div class="tf-meta" style="margin-top:1rem;">30 NODE TYPES · 83 EDGE TYPES · FORCE-DIRECTED · HIGHLIGHT MODE</div>
         <a class="tf-link" href="https://h3ad-sec.github.io/PIVEX/" target="_blank" rel="noopener">LAUNCH PIVEX →</a>
       </div>
@@ -962,13 +954,8 @@
           <div class="tf-name">TRACEPULSE</div>
           <span class="card-badge badge-live">LIVE</span>
         </div>
-        <div class="tf-tagline">"Threat actor queries, ready to run."</div>
-        <div class="tf-body">CVE and campaign-tied detection query packs. Each pulse contains SIEM-ready queries mapped to a specific vulnerability or active campaign — with hunting scope, affected platforms, and MITRE coverage. Deploy immediately when a new CVE drops.</div>
-        <div class="cap-list">
-          <div class="cap-item"><span class="cap-dot">◆</span><span>Packs organized by threat actor (APT29, Lazarus, FIN7, Scattered Spider...), malware family, and ATT&CK technique — not generic category buckets</span></div>
-          <div class="cap-item"><span class="cap-dot">◆</span><span>KQL, Sigma, and XQL — syntactically complete, copy-pasteable hunt queries with no placeholders to fill</span></div>
-          <div class="cap-item"><span class="cap-dot">◆</span><span>Hunt-to-detection bridge: every query that returns a hit is a detection rule candidate — the path from hunt to SIEM rule is one step</span></div>
-        </div>
+        <div class="tf-tagline">Threat Query Packs · CVE &amp; Campaign-Tied</div>
+        <div class="tf-body">CVE and campaign-tied detection query packs: deploy immediately when a new CVE drops or a campaign is active.</div>
         <div class="tf-meta" style="margin-top:1rem;">KQL · SIGMA · XQL · ACTOR-MAPPED · TECHNIQUE-TAGGED</div>
         <a class="tf-link" href="https://h3ad-sec.github.io/TRACEPULSE/" target="_blank" rel="noopener">LAUNCH TRACEPULSE →</a>
       </div>
@@ -979,7 +966,7 @@
         <div class="pillar">
           <div class="pillar-num">01</div>
           <div class="pillar-title">HYPOTHESIS-DRIVEN</div>
-          <div class="pillar-desc">Every hunt starts with a testable assumption — not a vague query. HYPOS structures your thinking before you touch a SIEM.</div>
+          <div class="pillar-desc">Every hunt starts with a testable assumption, not a vague query. HYPOS structures your thinking before you touch a SIEM.</div>
         </div>
         <div class="pillar">
           <div class="pillar-num">02</div>
@@ -989,7 +976,7 @@
         <div class="pillar">
           <div class="pillar-num">03</div>
           <div class="pillar-title">THREAT-TIED QUERIES</div>
-          <div class="pillar-desc">Hunt with queries built for the specific CVE or campaign you're tracking — not generic templates.</div>
+          <div class="pillar-desc">Hunt with queries built for the specific CVE or campaign you're tracking, not generic templates.</div>
         </div>
       </div>
 
