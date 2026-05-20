@@ -8,37 +8,49 @@
   <meta name="description"
     content="H3AD-HUNT by H3AD-SEC — three tools for structured, hypothesis-driven threat hunting. ATT&CK-native hypotheses, graph-based artifact pivoting, and actor-mapped hunt query packs.">
   <link rel="icon" href="https://h3ad-sec.github.io/fevicon.png?v=2026" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #06080e;
-      --panel: #0b1018;
-      --panel-alt: #101824;
+      --bg: #080c14;
+      --panel: #0d1117;
+      --panel-alt: #111827;
       --surface: #18253a;
-      --text: #e2eeff;
+      --text: #e6edf3;
       --text-dim: #96b0cc;
-      --muted: #62809c;
+      --muted: #6b7280;
       --muted-dim: #3a5470;
-      --accent: #00ff9f;
-      --accent2: #4d94ff;
-      --border: #1e3050;
-      --border-dim: #121e30;
+      --accent: #00d4ff;
+      --accent2: #58a6ff;
+      --border: #1c2333;
+      --border-dim: #111827;
       --nav-h: 48px;
+      --primary:        #00d4ff;
+      --primary-dim:    rgba(0, 212, 255, 0.08);
+      --primary-glow:   rgba(0, 212, 255, 0.18);
+      --status-live:    #00d4ff;
+      --status-partial: #f59e0b;
+      --status-soon:    #2d3748;
     }
 
     body.light {
-      --bg: #eef2f8;
+      --bg: #f8fafc;
       --panel: #ffffff;
-      --panel-alt: #e4ecf6;
+      --panel-alt: #f1f5f9;
       --surface: #ccd8ec;
-      --text: #060e1c;
+      --text: #0d1117;
       --text-dim: #142540;
-      --muted: #2c4a6a;
+      --muted: #5c6b8a;
       --muted-dim: #5c7a9a;
-      --accent: #004db8;
-      --accent2: #007a55;
-      --border: #a0b8d4;
-      --border-dim: #c8d8ec;
+      --accent: #0284c7;
+      --accent2: #2563eb;
+      --border: #e2e8f0;
+      --border-dim: #f1f5f9;
+      --primary:        #0284c7;
+      --primary-dim:    rgba(2, 132, 199, 0.07);
+      --primary-glow:   rgba(2, 132, 199, 0.14);
+      --status-live:    #0284c7;
+      --status-partial: #d97706;
+      --status-soon:    #cbd5e1;
     }
 
     *,
@@ -56,7 +68,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Share Tech Mono', monospace;
+      font-family: 'Exo 2', sans-serif;
       font-size: 14px;
       line-height: 1.6;
       min-height: 100vh;
@@ -64,24 +76,25 @@
       transition: background 0.3s, color 0.3s;
     }
 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 45% at 50% 0%, rgba(0, 212, 255, 0.055) 0%, transparent 100%),
+        radial-gradient(ellipse 50% 35% at 5% 100%, rgba(88, 166, 255, 0.04) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body.light::before {
+      background:
+        radial-gradient(ellipse 80% 45% at 50% 0%, rgba(2, 132, 199, 0.05) 0%, transparent 100%),
+        radial-gradient(ellipse 50% 35% at 5% 100%, rgba(37, 99, 235, 0.03) 0%, transparent 100%);
+    }
+
     a {
       color: inherit;
       text-decoration: none;
-    }
-
-    #matrix-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.18;
-    }
-
-    body.light #matrix-canvas {
-      opacity: 0.10;
     }
 
     .nav {
@@ -125,6 +138,8 @@
     }
 
     .nav-links a {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 500;
       font-size: 0.68rem;
       color: var(--muted);
       padding: 5px 9px;
@@ -138,17 +153,17 @@
     .nav-links a:hover {
       color: var(--accent);
       border-color: var(--border);
-      background: rgba(0, 255, 159, 0.05);
+      background: rgba(0, 212, 255, 0.05);
     }
 
     body.light .nav-links a:hover {
-      background: rgba(0, 77, 184, 0.07);
+      background: rgba(2, 132, 199, 0.07);
     }
 
     .nav-links a.nav-current {
       color: var(--accent);
       border-color: var(--accent);
-      background: rgba(0, 255, 159, 0.06);
+      background: rgba(0, 212, 255, 0.06);
     }
 
     .nav-links a:last-child {
@@ -192,6 +207,8 @@
     }
 
     .nav-links .nav-dropdown a {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 400;
       display: block;
       padding: 7px 12px;
       font-size: 0.65rem;
@@ -205,7 +222,7 @@
     .nav-links .nav-dropdown a:hover {
       color: var(--accent);
       border-left-color: var(--accent);
-      background: rgba(0, 255, 159, 0.04);
+      background: rgba(0, 212, 255, 0.04);
     }
 
     .theme-toggle {
@@ -279,6 +296,8 @@
     }
 
     .nav-drawer a {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 500;
       font-size: 0.75rem;
       color: var(--text-dim);
       padding: 8px 10px;
@@ -290,7 +309,7 @@
     .nav-drawer a:hover {
       color: var(--accent);
       border-left-color: var(--accent);
-      background: rgba(0, 255, 159, 0.04);
+      background: rgba(0, 212, 255, 0.04);
     }
 
     .nav-drawer a.nav-current {
@@ -317,6 +336,7 @@
     }
 
     .hero-tag {
+      font-family: 'Share Tech Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
@@ -327,6 +347,8 @@
     }
 
     .hero-title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
       font-size: clamp(1.4rem, 4vw, 2.6rem);
       color: var(--text);
       letter-spacing: 0.04em;
@@ -336,14 +358,16 @@
 
     .hero-title span {
       color: var(--accent);
-      text-shadow: 0 0 32px rgba(0, 255, 159, 0.4);
+      text-shadow: 0 0 32px rgba(0, 212, 255, 0.4);
     }
 
     body.light .hero-title span {
-      text-shadow: 0 0 24px rgba(0, 77, 184, 0.35);
+      text-shadow: 0 0 24px rgba(2, 132, 199, 0.35);
     }
 
     .hero-sub {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
       font-size: 0.74rem;
       color: var(--text-dim);
       line-height: 1.9;
@@ -367,15 +391,15 @@
       font-size: 0.63rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      background: rgba(77, 148, 255, 0.08);
+      background: rgba(88, 166, 255, 0.08);
       color: var(--accent2);
-      border: 1px solid rgba(77, 148, 255, 0.2);
+      border: 1px solid rgba(88, 166, 255, 0.2);
     }
 
     body.light .badge-cs {
       color: var(--accent2);
-      border-color: rgba(0, 122, 85, 0.25);
-      background: rgba(0, 122, 85, 0.06);
+      border-color: rgba(37, 99, 235, 0.25);
+      background: rgba(37, 99, 235, 0.06);
     }
 
     .badge-cs .dot-pulse {
@@ -596,19 +620,19 @@
       transition: opacity 0.2s;
     }
 
-    .tool-card:hover { border-color: rgba(0, 255, 159, 0.35); background: rgba(0, 255, 159, 0.02); }
+    .tool-card:hover { border-color: rgba(0, 212, 255, 0.35); background: rgba(0, 212, 255, 0.02); }
     .tool-card:hover::before { opacity: 1; }
-    .tool-card.live { border-color: rgba(0, 255, 159, 0.3); }
+    .tool-card.live { border-color: rgba(0, 212, 255, 0.3); }
     .tool-card.live::before { opacity: 0.6; }
 
     .card-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .card-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; background: var(--surface); flex-shrink: 0; }
     .card-badge { font-size: 0.55rem; letter-spacing: 0.18em; padding: 3px 8px; border-radius: 2px; text-transform: uppercase; white-space: nowrap; }
-    .badge-live { background: rgba(0, 255, 159, 0.12); color: var(--accent); border: 1px solid rgba(0, 255, 159, 0.3); }
+    .badge-live { background: rgba(0, 212, 255, 0.1); color: #00d4ff; border: 1px solid rgba(0, 212, 255, 0.25); }
     .card-name { font-size: 0.8rem; letter-spacing: 0.1em; color: var(--text); }
     .card-desc { font-size: 0.68rem; color: var(--text-dim); line-height: 1.6; flex: 1; }
-    .card-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--accent); padding: 6px 12px; border: 1px solid rgba(0, 255, 159, 0.3); border-radius: 3px; transition: 0.15s; align-self: flex-start; }
-    .card-link:hover { background: rgba(0, 255, 159, 0.08); }
+    .card-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--accent); padding: 6px 12px; border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 3px; transition: 0.15s; align-self: flex-start; }
+    .card-link:hover { background: rgba(0, 212, 255, 0.08); }
 
     .back-link {
       margin-top: 3rem;
@@ -689,15 +713,15 @@
       }
     }
     .xv-nav-pill{display:flex;flex-direction:column;align-items:flex-start;gap:1px;margin-left:10px;padding-left:10px;border-left:1px solid var(--border);white-space:nowrap;flex-shrink:0;text-decoration:none;}
-    .xv-pill-name{font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;line-height:1;}
+    .xv-pill-name{font-family:'Exo 2',sans-serif;font-weight:700;font-size:13px;letter-spacing:4px;line-height:1;}
     .xv-pill-accent{color:var(--accent);}
     .xv-pill-text{color:var(--text);}
-    .xv-pill-tagline{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1.5px;}
+    .xv-pill-tagline{font-family:'Exo 2',sans-serif;font-weight:400;font-size:8px;color:var(--muted);letter-spacing:1.5px;}
 
     /* ── Enterprise additions ───────────────────────────────────────── */
     .hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.75rem;}
     .stat-chip{display:flex;flex-direction:column;padding:10px 16px;background:var(--panel);border:1px solid var(--border);border-radius:4px;min-width:88px;}
-    .stat-val{font-size:1.05rem;color:var(--accent);letter-spacing:0.04em;line-height:1.2;}
+    .stat-val{font-family:'Exo 2',sans-serif;font-weight:700;font-size:1.05rem;color:var(--accent);letter-spacing:0.04em;line-height:1.2;}
     .stat-label{font-size:0.53rem;letter-spacing:0.18em;color:var(--muted);margin-top:4px;}
 
     .hero-chips{display:flex;flex-wrap:wrap;gap:5px;margin:1.5rem 0 1.75rem;}
@@ -708,16 +732,16 @@
 
     .tool-feature{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:28px 28px 22px;margin-bottom:14px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;transition:border-color 0.2s,background 0.2s;}
     .tool-feature::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.55;}
-    .tool-feature:hover{border-color:rgba(0,255,159,0.35);background:rgba(0,255,159,0.02);}
+    .tool-feature:hover{border-color:rgba(0,212,255,0.35);background:rgba(0,212,255,0.02);}
     .tf-header{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-    .tf-name{font-size:1rem;letter-spacing:0.14em;color:var(--text);}
-    .tf-tagline{font-size:0.8rem;color:var(--accent);letter-spacing:0.03em;}
-    .tf-body{font-size:0.71rem;color:var(--text-dim);line-height:1.8;max-width:600px;}
-    .tf-meta{font-size:0.57rem;letter-spacing:0.2em;color:var(--muted);border-top:1px solid var(--border-dim);padding-top:10px;margin-top:2px;}
-    .tf-link{display:inline-flex;align-items:center;gap:6px;font-size:0.63rem;letter-spacing:0.14em;color:var(--accent);padding:7px 14px;border:1px solid rgba(0,255,159,0.3);border-radius:3px;transition:0.15s;align-self:flex-start;margin-top:2px;}
-    .tf-link:hover{background:rgba(0,255,159,0.08);}
+    .tf-name{font-family:'Exo 2',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.14em;color:var(--text);}
+    .tf-tagline{font-family:'Exo 2',sans-serif;font-weight:300;font-size:0.8rem;color:var(--accent);letter-spacing:0.03em;}
+    .tf-body{font-family:'Exo 2',sans-serif;font-weight:400;font-size:0.71rem;color:var(--text-dim);line-height:1.8;max-width:600px;}
+    .tf-meta{font-family:'Share Tech Mono',monospace;font-size:0.57rem;letter-spacing:0.2em;color:var(--muted);border-top:1px solid var(--border-dim);padding-top:10px;margin-top:2px;}
+    .tf-link{font-family:'Exo 2',sans-serif;font-weight:600;display:inline-flex;align-items:center;gap:6px;font-size:0.63rem;letter-spacing:0.14em;color:var(--accent);padding:7px 14px;border:1px solid rgba(0,212,255,0.3);border-radius:3px;transition:0.15s;align-self:flex-start;margin-top:2px;}
+    .tf-link:hover{background:rgba(0,212,255,0.08);}
     .card-badge{font-size:0.55rem;letter-spacing:0.18em;padding:3px 8px;border-radius:2px;text-transform:uppercase;white-space:nowrap;}
-    .badge-live{background:rgba(0,255,159,0.12);color:var(--accent);border:1px solid rgba(0,255,159,0.3);}
+    .badge-live{background:rgba(0,212,255,0.1);color:#00d4ff;border:1px solid rgba(0,212,255,0.25);}
 
     .cap-list{display:flex;flex-direction:column;gap:6px;margin:1.25rem 0 0;}
     .cap-item{display:flex;align-items:baseline;gap:9px;font-size:0.65rem;color:var(--text-dim);line-height:1.6;}
@@ -726,8 +750,8 @@
     .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:3rem;}
     .pillar{background:var(--panel);padding:24px 20px;}
     .pillar-num{font-size:0.5rem;letter-spacing:0.28em;color:var(--accent);opacity:0.55;margin-bottom:12px;}
-    .pillar-title{font-size:0.68rem;letter-spacing:0.14em;color:var(--text);margin-bottom:8px;}
-    .pillar-desc{font-size:0.62rem;color:var(--muted);line-height:1.75;}
+    .pillar-title{font-family:'Exo 2',sans-serif;font-weight:700;font-size:0.68rem;letter-spacing:0.14em;color:var(--text);margin-bottom:8px;}
+    .pillar-desc{font-family:'Exo 2',sans-serif;font-weight:400;font-size:0.62rem;color:var(--muted);line-height:1.75;}
 
     .compliance-row{display:flex;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:3rem;}
     .compliance-cell{background:var(--panel);padding:14px 18px;flex:1;display:flex;flex-direction:column;gap:5px;}
@@ -735,18 +759,30 @@
     .compliance-label{font-size:0.52rem;letter-spacing:0.18em;color:var(--muted);}
 
     .back-link-ent{display:inline-flex;align-items:center;gap:6px;font-size:0.65rem;letter-spacing:0.12em;color:var(--muted);padding:8px 14px;border:1px solid var(--border);border-radius:4px;transition:0.15s;margin-bottom:3rem;}
-    .back-link-ent:hover{color:var(--accent);border-color:rgba(0,255,159,0.4);}
+    .back-link-ent:hover{color:var(--accent);border-color:rgba(0,212,255,0.4);}
 
     @media(max-width:700px){
       .pillars{grid-template-columns:1fr;}
       .compliance-row{flex-direction:column;}
       .stat-chip{min-width:72px;}
     }
+
+    .cap-strip {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden; margin-bottom: 2.5rem;
+    }
+    .cap-item {
+      background: var(--panel); padding: 14px 18px;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .cap-label { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+    .cap-value { font-family: 'Exo 2', sans-serif; font-weight: 600; font-size: 0.75rem; color: var(--text); letter-spacing: 0.04em; }
+    .cap-value span { color: var(--accent); }
   </style>
 </head>
 
 <body>
-  <canvas id="matrix-canvas"></canvas>
   <nav class="nav">
     <div class="hamburger" id="hamburger" onclick="toggleDrawer()"><span></span><span></span><span></span></div>
     <div class="nav-brand"><a href="https://h3ad-sec.github.io/"><img id="logoImg"
@@ -846,9 +882,9 @@
   <main>
     <div class="page">
       <section class="hero">
-        <span class="hero-tag">H3AD-SEC / THREAT HUNTING PLATFORM</span>
-        <h1 class="hero-title">Hunt before<br>the <span>alert fires.</span></h1>
-        <p class="hero-sub">Three purpose-built tools for structured, hypothesis-driven threat hunting — form hypotheses from ATT&CK intelligence, pivot across every artifact in the kill chain, and access curated threat actor query packs ready to run against your estate.</p>
+        <span class="hero-tag">THREAT HUNTING MODULE</span>
+        <h1 class="hero-title">Hunt Before<br><span>the Alert Fires.</span></h1>
+        <p class="hero-sub">Structured threat hunting across the full kill chain. Hypothesis-driven workflows, pivot graph infrastructure analysis, and CVE-tied detection packs — built for analysts hunting without a starting alert.</p>
         <div class="hero-chips">
           <span class="hero-chip">ATT&amp;CK NATIVE</span>
           <span class="hero-chip">HYPOTHESIS-DRIVEN</span>
@@ -868,6 +904,25 @@
         <p class="manifesto-text">Reactive hunting based on alerts is already too late.<br>Structure your hunts before the attacker shows up in your logs.<br><span style="font-size:0.65rem;color:var(--muted);letter-spacing:0.06em;">Hypothesis. Pivot. Detect. The complete hunter workflow.</span></p>
       </div>
 
+      <div class="cap-strip">
+        <div class="cap-item">
+          <span class="cap-label">Hunting Tools</span>
+          <span class="cap-value"><span>3</span> Tools Live</span>
+        </div>
+        <div class="cap-item">
+          <span class="cap-label">Methodology</span>
+          <span class="cap-value">Hypothesis-<span>Driven</span></span>
+        </div>
+        <div class="cap-item">
+          <span class="cap-label">Infrastructure</span>
+          <span class="cap-value">Pivot <span>Graph</span></span>
+        </div>
+        <div class="cap-item">
+          <span class="cap-label">Query Packs</span>
+          <span class="cap-value">CVE-<span>Tied</span></span>
+        </div>
+      </div>
+
       <div class="section-label">TOOLS</div>
 
       <div class="tool-feature">
@@ -876,7 +931,7 @@
           <span class="card-badge badge-live">LIVE</span>
         </div>
         <div class="tf-tagline">"Form better hypotheses. Hunt smarter. Miss nothing."</div>
-        <div class="tf-body">Query the MITRE ATT&CK STIX database locally — no external API for hypothesis generation. Input technique IDs, group names (APT29, Lazarus, FIN7), malware families, or campaign names. Get structured hunt hypotheses with data sources, detection logic, and evidence collection criteria organized into a searchable matrix.</div>
+        <div class="tf-body">Structured threat hunting hypothesis platform. Build, organize, and track hunting hypotheses with a curated database of pre-built scenarios — tagged by MITRE ATT&CK technique, tactic, and data source. Matrix view for coverage gap analysis.</div>
         <div class="cap-list">
           <div class="cap-item"><span class="cap-dot">◆</span><span>ATT&CK STIX data queried locally — full technique, group, malware, and campaign coverage without a live API call; works offline</span></div>
           <div class="cap-item"><span class="cap-dot">◆</span><span>Hypothesis matrix view: filter by tactic, technique ID, data source, or actor attribution — structured output you can document and hand off</span></div>
@@ -892,7 +947,7 @@
           <span class="card-badge badge-live">LIVE</span>
         </div>
         <div class="tf-tagline">"Pivot across every artifact in the investigation."</div>
-        <div class="tf-body">Interactive force-directed pivot graph for SOC investigations. Map any artifact — IP, domain, hash, process, user, email, host — through enrichment, correlation, and decision paths. Typed edges connect nodes by relationship: resolves_to, spawns, authenticates_as, connects_to, and more. Click any node to highlight its connections and dim everything else. The kill chain builds visually as you work.</div>
+        <div class="tf-body">Force-directed pivot graph for infrastructure analysis. Map relationships between IPs, domains, certificates, ASNs, and threat actors. Visualize lateral movement paths and identify shared infrastructure across campaigns without writing graph queries.</div>
         <div class="cap-list">
           <div class="cap-item"><span class="cap-dot">◆</span><span>Force-directed layout with 30 node types and 83 typed edge relationships — every connection in your investigation has a defined semantic</span></div>
           <div class="cap-item"><span class="cap-dot">◆</span><span>Node types: IP, Domain, Hash, Process, User, Email, Hostname, CVE, ATT&CK technique, Registry Key, and more</span></div>
@@ -908,7 +963,7 @@
           <span class="card-badge badge-live">LIVE</span>
         </div>
         <div class="tf-tagline">"Threat actor queries, ready to run."</div>
-        <div class="tf-body">Curated threat query packs mapped to active threat actors and campaigns. When an actor surfaces in a report or threat feed, run their specific hunt queries against your estate before they appear in your alerts. Generic hunt queries miss actor-specific tradecraft — TRACEPULSE maps to the actual TTP.</div>
+        <div class="tf-body">CVE and campaign-tied detection query packs. Each pulse contains SIEM-ready queries mapped to a specific vulnerability or active campaign — with hunting scope, affected platforms, and MITRE coverage. Deploy immediately when a new CVE drops.</div>
         <div class="cap-list">
           <div class="cap-item"><span class="cap-dot">◆</span><span>Packs organized by threat actor (APT29, Lazarus, FIN7, Scattered Spider...), malware family, and ATT&CK technique — not generic category buckets</span></div>
           <div class="cap-item"><span class="cap-dot">◆</span><span>KQL, Sigma, and XQL — syntactically complete, copy-pasteable hunt queries with no placeholders to fill</span></div>
@@ -923,18 +978,18 @@
       <div class="pillars">
         <div class="pillar">
           <div class="pillar-num">01</div>
-          <div class="pillar-title">HYPOTHESIS FIRST</div>
-          <div class="pillar-desc">HYPOS turns ATT&CK intelligence into structured, documented hunt hypotheses before you've seen a single alert. Scoped, repeatable, and handoff-ready — not ad hoc searches driven by gut feeling.</div>
+          <div class="pillar-title">HYPOTHESIS-DRIVEN</div>
+          <div class="pillar-desc">Every hunt starts with a testable assumption — not a vague query. HYPOS structures your thinking before you touch a SIEM.</div>
         </div>
         <div class="pillar">
           <div class="pillar-num">02</div>
-          <div class="pillar-title">GRAPH-BASED PIVOTING</div>
-          <div class="pillar-desc">Artifacts don't exist in isolation. PIVEX maps every relationship between indicators across an investigation — building the kill chain visually as you work, not as a retrospective exercise after the fact.</div>
+          <div class="pillar-title">INFRASTRUCTURE PIVOTING</div>
+          <div class="pillar-desc">Shared IPs, overlapping certificates, adjacent ASNs. PIVEX makes lateral infrastructure pivots visual.</div>
         </div>
         <div class="pillar">
           <div class="pillar-num">03</div>
-          <div class="pillar-title">ACTOR-SPECIFIC QUERIES</div>
-          <div class="pillar-desc">Generic hunt queries miss actor-specific tradecraft. TRACEPULSE maps queries to the specific groups, malware families, and sub-techniques — so you're hunting the actual TTP, not a category of behavior.</div>
+          <div class="pillar-title">THREAT-TIED QUERIES</div>
+          <div class="pillar-desc">Hunt with queries built for the specific CVE or campaign you're tracking — not generic templates.</div>
         </div>
       </div>
 
@@ -977,13 +1032,6 @@
     function setLogo(t) { const el = document.getElementById('logoImg'); if (el) el.src = t === 'light' ? 'https://h3ad-sec.github.io/logo-light.png' : 'https://h3ad-sec.github.io/logo-dark.png'; }
     function toggleTheme() { document.body.classList.toggle('light'); const t = document.body.classList.contains('light') ? 'light' : 'dark'; localStorage.setItem('theme', t); setLogo(t); }
     const saved = localStorage.getItem('theme'); if (saved === 'light') { document.body.classList.add('light'); setLogo('light'); } else setLogo('dark');
-    (function () {
-      const canvas = document.getElementById('matrix-canvas'), ctx = canvas.getContext('2d');
-      const chars = ['Hunt', 'Hypothesis', 'Pivot', 'Artifact', 'IOC', 'TTP', 'ATT&CK', 'T1059', 'T1003', 'T1047', 'T1566', 'T1071', 'T1021', 'Lateral', 'Persist', 'Exfil', 'KQL', 'SPL', 'Evidence', 'Timeline', 'Baseline', 'Anomaly', 'Endpoint', 'Network', 'Identity', 'LSASS', 'PsExec', 'WMIC', 'PowerShell', 'cmd.exe'];
-      let drops = []; function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; drops = Array(Math.floor(window.innerWidth / 18)).fill(1); }
-      function draw() { const light = document.body.classList.contains('light'); ctx.fillStyle = light ? 'rgba(238,242,248,0.1)' : 'rgba(6,8,14,0.14)'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = light ? '#004db8' : '#00ff9f'; ctx.font = '12px monospace'; for (let i = 0; i < drops.length; i++) { ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 18, drops[i] * 18); if (drops[i] * 18 > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++; } }
-      window.addEventListener('resize', init); init(); setInterval(draw, 45);
-    })();
   </script>
 </body>
 
