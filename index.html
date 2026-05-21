@@ -716,11 +716,12 @@
         padding: 1.2rem 1.25rem;
       }
     }
-    .xv-nav-pill{display:flex;flex-direction:column;align-items:flex-start;gap:1px;margin-left:10px;padding-left:10px;border-left:1px solid var(--border);white-space:nowrap;flex-shrink:0;text-decoration:none;}
-    .xv-pill-name{font-family:'Exo 2',sans-serif;font-weight:700;font-size:13px;letter-spacing:4px;line-height:1;}
+    .xv-nav-pill{display:flex;flex-direction:column;align-items:flex-start;gap:1px;margin-left:10px;padding-left:10px;border-left:1px solid var(--border);opacity:0;transform:translateX(-8px);pointer-events:none;transition:opacity .3s ease,transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;flex-shrink:0;}
+    .xv-pill-name{font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:4px;line-height:1;}
     .xv-pill-accent{color:var(--accent);}
     .xv-pill-text{color:var(--text);}
-    .xv-pill-tagline{font-family:'Exo 2',sans-serif;font-weight:400;font-size:8px;color:var(--muted);letter-spacing:1.5px;}
+    .xv-pill-tagline{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1.5px;}
+    body.hero-hidden .xv-nav-pill{opacity:1;transform:translateX(0);pointer-events:auto;}
 
     /* ── Enterprise additions ───────────────────────────────────────── */
     .hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.75rem;}
@@ -811,6 +812,9 @@
     .cap-label { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
     .cap-value { font-family: 'Exo 2', sans-serif; font-weight: 600; font-size: 0.75rem; color: var(--text); letter-spacing: 0.04em; }
     .cap-value span { color: var(--accent); }
+    @media(max-width:1000px){
+      .xv-nav-pill{opacity:1;transform:none;pointer-events:auto;transition:none;}
+    }
   </style>
 </head>
 
@@ -1049,6 +1053,7 @@
     function setLogo(t) { const el = document.getElementById('logoImg'); if (el) el.src = t === 'light' ? 'https://h3ad-sec.github.io/logo-light.png' : 'https://h3ad-sec.github.io/logo-dark.png'; }
     function toggleTheme() { document.body.classList.toggle('light'); const t = document.body.classList.contains('light') ? 'light' : 'dark'; localStorage.setItem('theme', t); setLogo(t); }
     const saved = localStorage.getItem('theme'); if (saved === 'light') { document.body.classList.add('light'); setLogo('light'); } else setLogo('dark');
+    (function(){const s=document.querySelector('.hero');if(!s)return;const o=new IntersectionObserver(([e])=>{document.body.classList.toggle('hero-hidden',!e.isIntersecting);},{threshold:0});o.observe(s);})();
   </script>
 </body>
 
